@@ -1,7 +1,10 @@
 const express = require('express');
 const hbs = require('hbs');
 
+
 var app = express();
+
+const port = process.env.PORT || 3000;
 
 hbs.registerPartials(__dirname + '/views/partials');
 
@@ -17,7 +20,7 @@ app.use((request, response, next) => {
     response.render('maintenance.hbs');
 });
 
- 
+
 app.use(express.static(__dirname + '/public'));
 
 hbs.registerHelper('year', () => new Date().getFullYear());
@@ -39,6 +42,6 @@ app.get('/bad', (request, response) => {
     response.send({error: 'Bad Message'});
 });
 
-app.listen(3000, () => console.log('Server listening pon port 3000'));
+app.listen(port, () => console.log(`Server listening on port ${port}`));
 
 
